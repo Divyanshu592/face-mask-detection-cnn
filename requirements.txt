@@ -1,7 +1,6 @@
 tensorflow==2.15.0
-numpy==1.26.4
-opencv-python==4.8.1.78
-lxml
-scikit-learn
-imbalanced-learn
+streamlit>=1.30.0
+opencv-python-headless
+numpy
+pillow
 matplotlib
