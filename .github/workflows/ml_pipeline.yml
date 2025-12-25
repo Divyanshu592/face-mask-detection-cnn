@@ -1,4 +1,4 @@
-name: ML Pipeline - Test & Retrain
+name: ML Pipeline - Test & Validate
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-and-train:
+  test-and-validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +23,18 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install tensorflow==2.15.0
-          pip install numpy opencv-python scikit-learn imbalanced-learn lxml pytest
+          pip install "numpy<2.0"
+          pip install -r requirements.txt
+          pip install scikit-learn imbalanced-learn lxml pytest
+
+      - name: TensorFlow sanity check
+        run: |
+          python - <<EOF
+          import tensorflow as tf
+          import numpy as np
+          print("TensorFlow:", tf.__version__)
+          print("NumPy:", np.__version__)
+          EOF
 
       - name: Run unit tests
         run: |
@@ -42,17 +52,9 @@ jobs:
             echo "No data validation script found, skipping"
           fi
 
-      - name: Train / Retrain model
-        run: |
-          if [ -f "src/training/train.py" ]; then
-            python src/training/train.py
-          else
-            echo "Training script not found, skipping training"
-          fi
-
-      - name: Save metrics as artifacts
+      - name: Upload metrics (if any)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: training-metrics
-          path: reports/metrics/
+          name: metrics-and-logs
+          path: reports/
