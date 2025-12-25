@@ -7,7 +7,9 @@ MODEL_PATH = "models/saved_model/mask_detector"
 IMAGE_SIZE = 224
 CLASS_NAMES = ["with_mask", "without_mask", "mask_weared_incorrect"]
 
-model = tf.keras.models.load_model(MODEL_PATH)
+# model = tf.keras.models.load_model(MODEL_PATH)
+model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+
 
 st.title("Face Mask Detection")
 
