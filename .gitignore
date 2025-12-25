@@ -1,0 +1,59 @@
+# =========================
+# Dataset (VERY LARGE)
+# =========================
+data/
+datasets/
+*.zip
+*.tar
+*.tar.gz
+
+# =========================
+# Model artifacts
+# =========================
+models/
+*.h5
+*.keras
+*.pb
+*.tflite
+checkpoints/
+saved_model/
+
+# =========================
+# TFRecords & cache
+# =========================
+*.tfrecord
+*.cache
+__pycache__/
+*.pyc
+
+# =========================
+# Notebooks checkpoints
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Logs & reports
+# =========================
+logs/
+reports/visualizations/
+reports/metrics/
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.env/
+.env.*
+
+# =========================
+# OS & editor files
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================
+# Kaggle credentials (SAFETY)
+# =========================
+kaggle.json
